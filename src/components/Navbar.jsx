@@ -1,4 +1,5 @@
 import React from "react";
+import gitIcon from "../assets/git.svg";
 
 const Navbar = () => {
   return (
@@ -33,7 +34,7 @@ const Navbar = () => {
           </li>
         </ul>
         <button className="cursor-pointer hover:scale-110 duration-200 flex md:backdrop-blur-[5000px] rounded-full px-1 py-1 gap-2 md:border-2 border-white items-center font-bold text-white">
-          <img className="invert" src="src/assets/git.svg" alt="Github" />
+          <img className="invert" src={gitIcon} alt="Github" />
           <span className="md:block hidden">Github</span>
         </button>
       </div>

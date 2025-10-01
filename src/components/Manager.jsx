@@ -2,6 +2,8 @@ import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import eyeIcon from "../assets/eye.svg";
+import closedEyeIcon from "../assets/ceye.svg";
 
 const Manager = () => {
   const ref = useRef();
@@ -10,7 +12,7 @@ const Manager = () => {
   const [passwordArray, setpasswordArray] = useState([]);
 
   const getPassword = async () => {
-    let req = await fetch("http://localhost:3000/");
+    let req = await fetch("/api/passwords");
     let passwords = await req.json();
     console.log(passwords);
     setpasswordArray(passwords);
@@ -38,11 +40,11 @@ const Manager = () => {
 
   const showPassword = () => {
     passref.current.type = "text";
-    if (ref.current.src.includes("src/assets/ceye.svg")) {
-      ref.current.src = "src/assets/eye.svg";
+    if (ref.current.src.includes("ceye")) {
+      ref.current.src = eyeIcon;
       passref.current.type = "password";
     } else {
-      ref.current.src = "src/assets/ceye.svg";
+      ref.current.src = closedEyeIcon;
       passref.current.type = "text";
     }
   };
@@ -54,7 +56,7 @@ const Manager = () => {
       form.password.length > 3
     ) {
       setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
-      await fetch("http://localhost:3000/", {
+      await fetch("/api/passwords", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +71,7 @@ const Manager = () => {
     let c = confirm("Are you sure you want to delete this password?");
     if (c) {
       setpasswordArray(passwordArray.filter((item) => item.id !== id));
-      await fetch("http://localhost:3000/", {
+      await fetch("/api/passwords", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -83,7 +85,7 @@ const Manager = () => {
     console.log("edit", id);
     // if any such id exists in the db , delete it
 
-    await fetch("http://localhost:3000/", {
+    await fetch("/api/passwords", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -164,7 +166,7 @@ const Manager = () => {
                   <img
                     ref={ref}
                     className="w-4 invert"
-                    src="src/assets/eye.svg"
+                    src={eyeIcon}
                     alt="eye"
                   />
                 </span>

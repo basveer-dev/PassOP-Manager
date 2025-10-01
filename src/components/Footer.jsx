@@ -1,4 +1,5 @@
 import React from "react";
+import heartIcon from "../assets/heart.svg";
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
         <span className="text-black">OP/&gt;</span>
       </div>
       <div className="flex justify-center items-center gap-1 text-md">
-        Create With <img width="24" src="src/assets/heart.svg" alt="" /> by
+        Create With <img width="24" src={heartIcon} alt="heart" /> by
         CodeWithBasveer
       </div>
     </div>
